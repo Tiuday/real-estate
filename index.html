@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Premier Realty — Find luxury properties in [City Name]. Expert agents, verified listings, exceptional results.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0F0820">
+<link rel="canonical" href="https://www.premierrealty.com/">
+<meta property="og:title" content="Premier Realty — Find Your Perfect Home">
+<meta property="og:description" content="Trusted by 2,000+ families. Expert guidance, exceptional results.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.premierrealty.com/">
+<title>Premier Realty — Find Your Perfect Home in [City Name]</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "name": "Premier Realty",
+  "url": "https://www.premierrealty.com/",
+  "telephone": "+15550000000",
+  "email": "hello@premierrealty.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Main Street",
+    "addressLocality": "[City Name]",
+    "addressCountry": "US"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "312",
+    "bestRating": "5"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Property Listings"
+  }
+}
+</script>
+
+<!-- WebGL Fragment Shader -->
+<script type="x-shader/x-fragment" id="fragment-shader">
+precision mediump float;
+uniform float uTime;
+uniform vec2 uResolution;
+
+vec3 mod289v3(vec3 x){return x-floor(x*(1./289.))*289.;}
+vec2 mod289v2(vec2 x){return x-floor(x*(1./289.))*289.;}
+vec3 permute(vec3 x){return mod289v3(((x*34.)+1.)*x);}
+
+float snoise(vec2 v){
+  const vec4 C=vec4(.211324865,.366025404,-.577350269,.024390244);
+  vec2 i=floor(v+dot(v,C.yy));
+  vec2 x0=v-i+dot(i,C.xx);
+  vec2 i1=x0.x>x0.y?vec2(1.,0.):vec2(0.,1.);
+  vec4 x12=x0.xyxy+C.xxzz;
+  x12.xy-=i1;
+  i=mod289v2(i);
+  vec3 p=permute(permute(i.y+vec3(0.,i1.y,1.))+i.x+vec3(0.,i1.x,1.));
+  vec3 m=max(.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.);
+  m=m*m; m=m*m;
+  vec3 x=2.*fract(p*C.www)-1.;
+  vec3 h=abs(x)-.5;
+  vec3 ox=floor(x+.5);
+  vec3 a0=x-ox;
+  m*=1.79284291-.85373472*(a0*a0+h*h);
+  vec3 g;
+  g.x=a0.x*x0.x+h.x*x0.y;
+  g.yz=a0.yz*x12.xz+h.yz*x12.yw;
+  return 130.*dot(m,g);
+}
+
+float fbm(vec2 p){
+  float v=0.,a=.5;
+  mat2 rot=mat2(.866,.5,-.5,.866);
+  for(int i=0;i<6;i++){
+    v+=a*snoise(p);
+    p=rot*p*2.1+vec2(1.7,9.2);
+    a*=.5;
+  }
+  return v;
+}
+
+void main(){
+  vec2 uv=gl_FragCoord.xy/uResolution;
+  vec2 p=uv*2.5-1.;
+  p.x*=uResolution.x/uResolution.y;
+  float t=uTime;
+  float q=fbm(p+t*.08);
+  float r=fbm(p+vec2(q*.6,q*.4)+t*.05);
+  float s=fbm(p+vec2(r,r*.7));
+  vec3 deep=vec3(.059,.031,.125);
+  vec3 purple=vec3(.176,.106,.369);
+  vec3 gold=vec3(.788,.663,.431);
+  vec3 cream=vec3(.98,.973,.941);
+  float t1=smoothstep(0.,1.,q*.5+.5);
+  float t2=smoothstep(0.,1.,r*.5+.5);
+  float t3=smoothstep(0.,1.,s*.5+.5);
+  vec3 col=mix(deep,purple,t1*.7);
+  col=mix(col,gold*.5,t2*.3);
+  col=mix(col,cream*.05,t3*.15);
+  float pulse=.5+.5*sin(uTime*180.);
+  col+=gold*.03*pulse;
+  gl_FragColor=vec4(col,1.);
+}
+</script>
+
+<style>
+/* 1. CSS RESET */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+img{display:block;max-width:100%;}
+a{text-decoration:none;color:inherit;}
+ul{list-style:none;}
+button{cursor:pointer;border:none;background:none;font:inherit;}
+input,select,textarea{font:inherit;}
+
+/* 2. CSS CUSTOM PROPERTIES */
+:root{
+  /* CLIENT BRAND COLORS — REPLACE THESE */
+  --color-primary:#1A2E44;
+  --color-accent:#C9A96E;
+  --color-surface:#F8F6F1;
+  --color-text:#1A1A1A;
+  --color-text-muted:#6B6B6B;
+  --color-white:#FFFFFF;
+  --color-border:#E8E4DC;
+
+  /* SHADER PALETTE — fixed, do not change per client */
+  --color-shader-gold:#C9A96E;
+  --color-shader-purple:#2D1B5E;
+  --color-shader-deep:#0F0820;
+  --color-shader-cream:#FAF8F0;
+  --color-shader-gold-dim:rgba(201,169,110,0.25);
+
+  /* TYPOGRAPHY */
+  --font-display:'Cormorant Garamond',Georgia,serif;
+  --font-body:'DM Sans',system-ui,sans-serif;
+
+  /* SPACING SCALE */
+  --space-xs:8px;
+  --space-sm:16px;
+  --space-md:24px;
+  --space-lg:48px;
+  --space-xl:80px;
+  --space-2xl:120px;
+
+  /* RADII */
+  --radius-sm:8px;
+  --radius-md:12px;
+  --radius-lg:20px;
+  --radius-pill:999px;
+
+  /* TRANSITIONS */
+  --transition-fast:0.18s ease;
+  --transition-mid:0.32s ease;
+  --transition-slow:0.6s cubic-bezier(0.16,1,0.3,1);
+}
+
+/* 3. BASE TYPOGRAPHY */
+body{font-family:var(--font-body);color:var(--color-text);background:var(--color-white);line-height:1.6;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15;}
+.display{font-family:var(--font-display);font-weight:700;}
+.eyebrow{font-family:var(--font-body);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--color-accent);}
+.section-title{font-family:var(--font-display);font-size:clamp(32px,5vw,52px);font-weight:600;}
+.section-lead{font-size:17px;color:var(--color-text-muted);max-width:560px;line-height:1.7;}
+
+/* 4. LAYOUT UTILITIES */
+.container{max-width:1200px;margin:0 auto;padding:0 var(--space-md);}
+.section-pad{padding:var(--space-xl) 0;}
+.section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:var(--space-lg);}
+.gold-line{display:block;width:80px;height:2px;background:var(--color-accent);margin:var(--space-sm) 0;}
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.fade-in.visible{opacity:1;transform:none;}
+.search-fields{display:flex;flex-direction:column;gap:var(--space-md);}
+.step-icon svg{width:32px;height:32px;display:block;margin:0 auto;}
+.section-subtitle{font-size:17px;color:var(--color-text-muted);margin-top:8px;max-width:560px;}
+.text-center{text-align:center;}
+.text-center .gold-line{margin-left:auto;margin-right:auto;}
+.text-center .section-subtitle{margin-left:auto;margin-right:auto;}
+#lead-capture .eyebrow{color:rgba(201,169,110,0.8);}
+.mt-sm{margin-top:var(--space-sm);}
+.mt-md{margin-top:var(--space-md);}
+
+/* 5. NAV */
+#main-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px var(--space-md);display:flex;align-items:center;justify-content:space-between;transition:background var(--transition-mid),box-shadow var(--transition-mid),padding var(--transition-mid);}
+#main-nav.scrolled{background:rgba(255,255,255,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 2px 24px rgba(0,0,0,.08);padding:14px var(--space-md);}
+.nav-logo{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--color-white);letter-spacing:.02em;transition:color var(--transition-fast);}
+.nav-logo span{color:var(--color-accent);}
+#main-nav.scrolled .nav-logo{color:var(--color-primary);}
+.nav-links{display:flex;gap:var(--space-md);align-items:center;}
+.nav-links a{font-size:14px;font-weight:500;color:rgba(255,255,255,.85);position:relative;padding-bottom:2px;transition:color var(--transition-fast);}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:var(--color-accent);transition:width var(--transition-fast);}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-links a:hover{color:var(--color-white);}
+#main-nav.scrolled .nav-links a{color:var(--color-text);}
+#main-nav.scrolled .nav-links a:hover{color:var(--color-primary);}
+.nav-actions{display:flex;align-items:center;gap:var(--space-sm);}
+.nav-search-btn{background:none;color:rgba(255,255,255,.8);padding:8px;border-radius:50%;transition:background var(--transition-fast);}
+.nav-search-btn:hover{background:rgba(255,255,255,.1);}
+#main-nav.scrolled .nav-search-btn{color:var(--color-text);}
+.nav-cta{background:var(--color-accent);color:var(--color-white);font-size:13px;font-weight:600;padding:10px 22px;border-radius:var(--radius-pill);transition:opacity var(--transition-fast),transform var(--transition-fast);}
+.nav-cta:hover{opacity:.88;transform:translateY(-1px);}
+.hamburger{display:none;flex-direction:column;gap:5px;padding:8px;cursor:pointer;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--color-white);border-radius:2px;transition:transform var(--transition-mid),opacity var(--transition-fast);}
+#main-nav.scrolled .hamburger span{background:var(--color-text);}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-drawer{position:fixed;top:0;right:-100%;width:80%;max-width:320px;height:100vh;background:var(--color-white);z-index:999;padding:80px var(--space-md) var(--space-md);display:flex;flex-direction:column;gap:var(--space-sm);box-shadow:-4px 0 32px rgba(0,0,0,.12);transition:right var(--transition-mid);}
+.mobile-drawer.open{right:0;}
+.mobile-drawer a{font-size:18px;font-weight:500;color:var(--color-text);padding:12px 0;border-bottom:1px solid var(--color-border);}
+.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:998;opacity:0;pointer-events:none;transition:opacity var(--transition-mid);}
+.drawer-overlay.open{opacity:1;pointer-events:all;}
+
+/* 6. HERO + SHADER */
+#shader-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+#hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;z-index:1;}
+.hero-bg{position:absolute;inset:0;z-index:1;}
+.hero-bg-img{width:100%;height:100%;object-fit:cover;mix-blend-mode:luminosity;opacity:.55;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,14,61,.75) 0%,rgba(10,5,25,.55) 100%);}
+.hero-content{position:relative;z-index:2;padding:140px var(--space-md) var(--space-xl);max-width:1200px;margin:0 auto;width:100%;}
+.hero-headline{font-family:var(--font-display);font-size:clamp(40px,8vw,72px);font-weight:700;color:var(--color-shader-cream);letter-spacing:-.02em;line-height:1.1;max-width:700px;}
+.hero-gold-line{display:block;width:80px;height:2px;background:var(--color-accent);margin:var(--space-sm) 0;}
+.hero-sub{font-size:clamp(16px,2vw,20px);color:rgba(250,248,240,.8);max-width:560px;margin-bottom:var(--space-lg);line-height:1.6;}
+.hero-search{display:flex;align-items:center;background:rgba(255,255,255,.12);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.2);border-radius:var(--radius-pill);padding:6px 6px 6px 20px;max-width:640px;margin-bottom:var(--space-md);gap:8px;}
+.hero-search input{flex:1;background:none;border:none;outline:none;color:var(--color-shader-cream);font-size:15px;}
+.hero-search input::placeholder{color:rgba(250,248,240,.55);}
+.hero-search input:focus{border-bottom:1px solid var(--color-accent);}
+.hero-search select{background:rgba(255,255,255,.1);border:none;outline:none;color:var(--color-shader-cream);font-size:14px;padding:8px 12px;border-radius:var(--radius-pill);}
+.hero-search select option{color:var(--color-text);}
+.hero-search-btn{background:var(--color-accent);color:var(--color-white);font-size:14px;font-weight:600;padding:12px 28px;border-radius:var(--radius-pill);white-space:nowrap;transition:opacity var(--transition-fast);}
+.hero-search-btn:hover{opacity:.85;}
+.hero-ctas{display:flex;gap:var(--space-sm);flex-wrap:wrap;}
+.btn-ghost{font-size:14px;font-weight:500;color:var(--color-shader-cream);padding:11px 24px;border:1.5px solid rgba(250,248,240,.4);border-radius:var(--radius-pill);transition:border-color var(--transition-fast),background var(--transition-fast);}
+.btn-ghost:hover{border-color:var(--color-accent);background:rgba(201,169,110,.1);}
+.hero-thumbs{display:flex;gap:12px;margin:var(--space-md) 0;flex-wrap:wrap;}
+.hero-thumb{width:160px;flex-shrink:0;}
+.hero-thumb img{width:160px;height:110px;object-fit:cover;border-radius:var(--radius-md);border:1.5px solid rgba(201,169,110,.4);}
+.hero-thumb-label{font-size:11px;color:rgba(250,248,240,.7);margin-top:6px;text-align:center;}
+.scroll-indicator{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.scroll-label{font-size:10px;letter-spacing:.15em;color:rgba(250,248,240,.5);}
+.scroll-chevron{width:16px;height:16px;border-right:2px solid var(--color-accent);border-bottom:2px solid var(--color-accent);transform:rotate(45deg);animation:chevronBounce 1.6s ease-in-out infinite;}
+
+/* 7. STATS BAR */
+#stats-bar{background:var(--color-primary);padding:var(--space-lg) var(--space-md);}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);max-width:1200px;margin:0 auto;}
+.stat-item{text-align:center;padding:var(--space-md);position:relative;}
+.stat-item+.stat-item::before{content:'';position:absolute;left:0;top:20%;height:60%;width:1px;background:rgba(201,169,110,.3);}
+.stat-number{font-family:var(--font-display);font-size:clamp(36px,5vw,52px);font-weight:700;color:var(--color-accent);display:block;line-height:1;}
+.stat-label{font-size:13px;color:rgba(255,255,255,.75);margin-top:6px;letter-spacing:.03em;}
+
+/* 8. LISTINGS GRID */
+#featured-listings{padding:var(--space-xl) 0;background:var(--color-surface);}
+.filter-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:var(--space-lg);}
+.filter-tab{font-size:13px;font-weight:500;padding:8px 20px;border-radius:var(--radius-pill);border:1.5px solid var(--color-border);color:var(--color-text-muted);background:var(--color-white);transition:all var(--transition-fast);cursor:pointer;}
+.filter-tab.active,.filter-tab:hover{border-color:var(--color-accent);color:var(--color-accent);background:rgba(201,169,110,.06);}
+.filter-tab.active{background:var(--color-accent);color:var(--color-white);}
+.listings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md);}
+.property-card{background:var(--color-white);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--color-border);transition:transform var(--transition-mid),box-shadow var(--transition-mid);position:relative;}
+.property-card:hover{transform:scale(1.02);box-shadow:0 16px 48px rgba(0,0,0,.12);}
+.property-card.hidden{display:none;}
+.card-image{position:relative;padding-top:75%;overflow:hidden;}
+.card-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform var(--transition-slow);}
+.property-card:hover .card-image img{transform:scale(1.05);}
+.card-badge{position:absolute;top:14px;left:14px;font-size:11px;font-weight:600;padding:4px 12px;border-radius:var(--radius-pill);letter-spacing:.05em;z-index:1;}
+.badge-sale{background:var(--color-primary);color:var(--color-white);}
+.badge-rent{background:#2A7A4B;color:var(--color-white);}
+.badge-new{background:var(--color-accent);color:var(--color-white);}
+.card-fav{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;z-index:1;transition:background var(--transition-fast);}
+.card-fav:hover{background:var(--color-white);}
+.card-fav svg{width:16px;height:16px;}
+.card-view-btn{position:absolute;bottom:14px;left:50%;transform:translateX(-50%) translateY(8px);background:var(--color-accent);color:var(--color-white);font-size:13px;font-weight:600;padding:8px 22px;border-radius:var(--radius-pill);opacity:0;transition:opacity var(--transition-fast),transform var(--transition-fast);white-space:nowrap;z-index:1;}
+.property-card:hover .card-view-btn{opacity:1;transform:translateX(-50%) translateY(0);}
+.card-body{padding:var(--space-md);}
+.card-price{font-family:var(--font-display);font-size:26px;font-weight:700;color:var(--color-primary);}
+.card-name{font-size:15px;font-weight:500;color:var(--color-text);margin:4px 0 2px;}
+.card-address{font-size:13px;color:var(--color-text-muted);}
+.card-specs{display:flex;gap:var(--space-sm);margin-top:12px;padding-top:12px;border-top:1px solid var(--color-border);}
+.spec-item{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--color-text-muted);}
+.spec-item svg{width:14px;height:14px;color:var(--color-accent);}
+.view-all-link{font-size:14px;color:var(--color-accent);font-weight:500;display:flex;align-items:center;gap:4px;}
+.view-all-link:hover{text-decoration:underline;}
+
+/* 9. SEARCH PANEL */
+#search-panel{padding:var(--space-xl) 0;background:var(--color-white);}
+.search-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-lg);max-width:900px;margin:0 auto;}
+.search-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-md);}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-label{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--color-text-muted);}
+.form-input,.form-select{background:var(--color-white);border:1.5px solid var(--color-border);border-radius:var(--radius-sm);padding:11px 14px;font-size:14px;color:var(--color-text);transition:border-color var(--transition-fast);}
+.form-input:focus,.form-select:focus{outline:none;border-color:var(--color-accent);}
+.price-slider-wrap{padding:4px 0;}
+.price-range-track{position:relative;height:4px;background:var(--color-border);border-radius:2px;margin:20px 6px 8px;}
+.price-range-fill{position:absolute;height:100%;background:var(--color-accent);border-radius:2px;}
+.price-range-wrap{position:relative;height:20px;}
+.price-range-wrap input[type=range]{position:absolute;width:100%;height:4px;background:none;pointer-events:none;appearance:none;-webkit-appearance:none;top:-2px;left:0;}
+.price-range-wrap input[type=range]::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--color-accent);border:2px solid var(--color-white);box-shadow:0 2px 6px rgba(0,0,0,.15);pointer-events:all;cursor:pointer;}
+.price-range-wrap input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--color-accent);border:2px solid var(--color-white);pointer-events:all;cursor:pointer;}
+.price-display{display:flex;justify-content:space-between;font-size:13px;font-weight:600;color:var(--color-primary);margin-top:4px;}
+.bed-pills{display:flex;gap:8px;flex-wrap:wrap;}
+.bed-pill{font-size:13px;padding:7px 16px;border-radius:var(--radius-pill);border:1.5px solid var(--color-border);color:var(--color-text-muted);background:var(--color-white);cursor:pointer;transition:all var(--transition-fast);}
+.bed-pill.active,.bed-pill:hover{border-color:var(--color-accent);color:var(--color-accent);}
+.bed-pill.active{background:var(--color-accent);color:var(--color-white);}
+.amenity-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.amenity-check{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;color:var(--color-text-muted);}
+.amenity-check input{accent-color:var(--color-accent);width:15px;height:15px;}
+.search-full-btn{width:100%;background:var(--color-accent);color:var(--color-white);font-size:15px;font-weight:600;padding:14px;border-radius:var(--radius-sm);margin-top:var(--space-md);transition:opacity var(--transition-fast);}
+.search-full-btn:hover{opacity:.88;}
+.map-link{text-align:center;margin-top:var(--space-sm);font-size:14px;color:var(--color-accent);}
+.map-link a:hover{text-decoration:underline;}
+
+/* 10. NEIGHBORHOODS */
+#neighborhoods{padding:var(--space-xl) 0;background:var(--color-surface);}
+.neighborhood-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-md);}
+.hood-card{position:relative;border-radius:var(--radius-lg);overflow:hidden;min-height:300px;cursor:pointer;}
+.hood-card img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;transition:transform var(--transition-slow);}
+.hood-card:hover img{transform:scale(1.05);}
+.hood-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,5,25,.85) 0%,rgba(10,5,25,.2) 60%,transparent 100%);}
+.hood-content{position:absolute;bottom:0;left:0;right:0;padding:var(--space-md);}
+.hood-name{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--color-white);}
+.hood-city{font-size:13px;color:rgba(255,255,255,.6);margin-top:2px;}
+.hood-tags{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap;}
+.hood-tag{font-size:11px;padding:3px 10px;border-radius:var(--radius-pill);border:1px solid rgba(201,169,110,.5);color:var(--color-accent);}
+.hood-stats{display:flex;gap:var(--space-md);font-size:12px;color:rgba(255,255,255,.7);}
+.hood-explore{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.9);background:var(--color-accent);color:var(--color-white);font-size:14px;font-weight:600;padding:10px 24px;border-radius:var(--radius-pill);opacity:0;transition:all var(--transition-fast);}
+.hood-card:hover .hood-explore{opacity:1;transform:translate(-50%,-50%) scale(1);}
+.neighborhoods-cta{text-align:center;margin-top:var(--space-lg);}
+.btn-outline{font-size:14px;font-weight:600;padding:12px 32px;border-radius:var(--radius-pill);border:1.5px solid var(--color-accent);color:var(--color-accent);transition:all var(--transition-fast);}
+.btn-outline:hover{background:var(--color-accent);color:var(--color-white);}
+
+/* 11. HOW IT WORKS */
+#how-it-works{padding:var(--space-xl) 0;background:var(--color-surface);}
+.steps-row{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-md);position:relative;margin-top:var(--space-lg);}
+.steps-row::before{content:'';position:absolute;top:30px;left:calc(12.5% + 16px);right:calc(12.5% + 16px);height:1px;background:var(--color-accent);opacity:.3;pointer-events:none;}
+.step-item{text-align:center;padding:0 var(--space-sm);}
+.step-num{width:60px;height:60px;border-radius:50%;background:var(--color-accent);color:var(--color-white);font-family:var(--font-display);font-size:24px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto var(--space-sm);}
+.step-icon{margin:0 auto var(--space-sm);color:var(--color-accent);}
+.step-title{font-family:var(--font-display);font-size:18px;font-weight:600;margin-bottom:8px;}
+.step-desc{font-size:13px;color:var(--color-text-muted);line-height:1.6;}
+
+/* 12. WHY US */
+#why-us{padding:var(--space-xl) 0;background:var(--color-white);}
+.why-split{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);align-items:center;}
+.why-left .section-title{margin-bottom:var(--space-md);}
+.why-left p{color:var(--color-text-muted);line-height:1.8;margin-bottom:var(--space-lg);}
+.btn-primary{background:var(--color-primary);color:var(--color-white);font-size:14px;font-weight:600;padding:13px 32px;border-radius:var(--radius-pill);display:inline-flex;transition:opacity var(--transition-fast);}
+.btn-primary:hover{opacity:.85;}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-md);}
+.why-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--space-md);}
+.why-card svg{color:var(--color-accent);width:28px;height:28px;margin-bottom:10px;}
+.why-card h4{font-family:var(--font-display);font-size:17px;font-weight:600;margin-bottom:6px;}
+.why-card p{font-size:13px;color:var(--color-text-muted);line-height:1.6;}
+
+/* 13. TESTIMONIALS */
+#testimonials{padding:var(--space-xl) 0;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse at 20% 50%,rgba(201,169,110,.15) 0%,transparent 60%),
+             radial-gradient(ellipse at 80% 20%,rgba(90,50,140,.12) 0%,transparent 60%),
+             linear-gradient(135deg,#1A0F3C 0%,#0F0820 50%,#1A0F3C 100%);
+  background-size:200% 200%;
+  animation:shimmer 8s ease-in-out infinite;}
+.testi-header{text-align:center;margin-bottom:var(--space-lg);}
+.testi-header .eyebrow{margin-bottom:12px;}
+.testi-header .section-title{color:var(--color-shader-cream);font-style:italic;}
+.testi-header .gold-line{margin:var(--space-sm) auto;}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md);}
+.testi-card{background:rgba(255,255,255,.04);backdrop-filter:blur(8px);border:1px solid rgba(201,169,110,.25);border-radius:var(--radius-lg);padding:36px 32px;transition:border-color var(--transition-mid),box-shadow var(--transition-mid);}
+.testi-card:hover{border-color:rgba(201,169,110,.6);box-shadow:0 0 30px rgba(201,169,110,.08);}
+.testi-quote-mark{font-family:var(--font-display);font-size:80px;line-height:.5;color:var(--color-shader-gold);opacity:.6;margin-bottom:16px;}
+.testi-text{font-family:var(--font-display);font-style:italic;font-size:19px;line-height:1.7;color:var(--color-shader-cream);}
+.testi-stars{display:flex;gap:4px;margin-top:20px;}
+.testi-stars svg{width:16px;height:16px;fill:var(--color-accent);}
+.testi-divider{border:none;border-top:1px solid rgba(201,169,110,.15);margin:20px 0;}
+.testi-author{display:flex;align-items:center;gap:14px;}
+.testi-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#C9A96E,#8B5E2C);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:18px;font-weight:600;color:var(--color-shader-cream);flex-shrink:0;}
+.testi-name{font-size:15px;font-weight:600;color:var(--color-shader-cream);}
+.testi-city{font-size:12px;color:rgba(201,169,110,.7);}
+.testi-cta{text-align:center;margin-top:var(--space-lg);}
+.testi-cta a{font-size:16px;color:var(--color-accent);border-bottom:1px solid transparent;transition:border-color var(--transition-fast);}
+.testi-cta a:hover{border-bottom-color:var(--color-accent);}
+
+/* 14. TEAM */
+#team{padding:var(--space-xl) 0;background:var(--color-white);}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md);}
+.agent-card{text-align:center;border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-lg) var(--space-md);transition:box-shadow var(--transition-mid);}
+.agent-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.08);}
+.agent-avatar{width:96px;height:96px;border-radius:50%;margin:0 auto var(--space-md);background:linear-gradient(135deg,var(--color-primary),#2A4E70);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:32px;font-weight:700;color:var(--color-white);}
+.agent-name{font-family:var(--font-display);font-size:22px;font-weight:600;margin-bottom:4px;}
+.agent-title{font-size:13px;color:var(--color-accent);font-weight:500;letter-spacing:.04em;margin-bottom:var(--space-sm);}
+.agent-specs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:var(--space-sm);}
+.agent-spec{font-size:11px;padding:3px 10px;background:var(--color-surface);border-radius:var(--radius-pill);color:var(--color-text-muted);}
+.agent-bio{font-size:13px;color:var(--color-text-muted);line-height:1.6;margin-bottom:var(--space-md);}
+.agent-contacts{display:flex;justify-content:center;gap:var(--space-sm);margin-bottom:var(--space-md);}
+.agent-contact-btn{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--color-border);display:flex;align-items:center;justify-content:center;color:var(--color-text-muted);transition:all var(--transition-fast);}
+.agent-contact-btn:hover{border-color:var(--color-accent);color:var(--color-accent);}
+.agent-contact-btn svg{width:16px;height:16px;}
+.agent-profile-link{font-size:13px;color:var(--color-accent);font-weight:500;}
+.agent-profile-link:hover{text-decoration:underline;}
+
+/* 15. LEAD CAPTURE */
+#lead-capture{padding:var(--space-xl) 0;background:var(--color-primary);}
+.lead-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);align-items:start;}
+.lead-left .section-title{color:var(--color-white);}
+.lead-left p{color:rgba(255,255,255,.7);margin-top:var(--space-sm);}
+.lead-form{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-lg);padding:var(--space-lg);}
+.lead-form .form-label{color:rgba(255,255,255,.6);}
+.lead-form .form-input,.lead-form .form-select{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:var(--color-white);}
+.lead-form .form-input::placeholder{color:rgba(255,255,255,.35);}
+.lead-form .form-input:focus,.lead-form .form-select:focus{border-color:var(--color-accent);}
+.lead-form .form-select option{color:var(--color-text);}
+.lead-submit{width:100%;background:var(--color-accent);color:var(--color-white);font-size:15px;font-weight:600;padding:14px;border-radius:var(--radius-sm);margin-top:var(--space-md);transition:opacity var(--transition-fast);}
+.lead-submit:hover{opacity:.88;}
+.lead-trust{display:flex;gap:var(--space-md);margin-top:var(--space-md);flex-wrap:wrap;}
+.trust-item{font-size:12px;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px;}
+.trust-item svg{width:12px;height:12px;}
+
+/* 16. FOOTER */
+#main-footer{background:var(--color-primary);border-top:1px solid rgba(201,169,110,.3);padding:var(--space-xl) 0 0;}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:var(--space-xl);max-width:1200px;margin:0 auto;padding:0 var(--space-md);}
+.footer-logo{font-family:var(--font-display);font-size:24px;font-weight:700;color:var(--color-white);}
+.footer-logo span{color:var(--color-accent);}
+.footer-tagline{font-size:13px;color:rgba(255,255,255,.5);margin:10px 0 var(--space-md);}
+.footer-socials{display:flex;gap:10px;}
+.footer-social{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);transition:all var(--transition-fast);}
+.footer-social:hover{border-color:var(--color-accent);color:var(--color-accent);}
+.footer-social svg{width:16px;height:16px;}
+.footer-col-title{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:var(--space-md);}
+.footer-links{display:flex;flex-direction:column;gap:10px;}
+.footer-links a{font-size:14px;color:rgba(255,255,255,.65);transition:color var(--transition-fast);}
+.footer-links a:hover{color:var(--color-accent);}
+.footer-contact-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;font-size:13px;color:rgba(255,255,255,.65);}
+.footer-contact-item svg{width:16px;height:16px;color:var(--color-accent);flex-shrink:0;margin-top:2px;}
+.footer-newsletter{display:flex;gap:8px;margin-top:8px;}
+.footer-newsletter input{flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;color:var(--color-white);}
+.footer-newsletter input::placeholder{color:rgba(255,255,255,.35);}
+.footer-newsletter input:focus{outline:none;border-color:var(--color-accent);}
+.footer-newsletter button{background:var(--color-accent);color:var(--color-white);font-size:13px;font-weight:600;padding:10px 18px;border-radius:var(--radius-sm);white-space:nowrap;transition:opacity var(--transition-fast);}
+.footer-newsletter button:hover{opacity:.85;}
+.footer-bottom{max-width:1200px;margin:var(--space-lg) auto 0;padding:var(--space-md) var(--space-md);border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.35);}
+.footer-bottom-links{display:flex;gap:var(--space-md);}
+.footer-bottom-links a{font-size:12px;color:rgba(255,255,255,.35);transition:color var(--transition-fast);}
+.footer-bottom-links a:hover{color:var(--color-accent);}
+
+/* 17. CHATBOT WIDGET */
+#chatbot-widget{position:fixed;bottom:28px;right:28px;z-index:9999;}
+#chatbot-toggle{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#C9A96E,#8B5E2C);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(201,169,110,.4);transition:transform var(--transition-fast),box-shadow var(--transition-fast);position:relative;}
+#chatbot-toggle:hover{transform:scale(1.08);box-shadow:0 8px 24px rgba(201,169,110,.35);}
+#chatbot-toggle svg{width:28px;height:28px;position:absolute;transition:opacity var(--transition-fast),transform var(--transition-fast);}
+#chatbot-toggle .icon-chat{opacity:1;transform:scale(1);}
+#chatbot-toggle .icon-close{opacity:0;transform:scale(.7);}
+#chatbot-toggle.open .icon-chat{opacity:0;transform:scale(.7);}
+#chatbot-toggle.open .icon-close{opacity:1;transform:scale(1);}
+.pulse-ring{position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--color-accent);animation:pulseRing 2s ease-out 3;}
+#chatbot-panel{position:absolute;bottom:76px;right:0;width:380px;height:520px;background:var(--color-shader-deep);border:1px solid rgba(201,169,110,.3);border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column;opacity:0;transform:translateY(20px);pointer-events:none;transition:opacity var(--transition-mid),transform var(--transition-mid);}
+#chatbot-panel.open{opacity:1;transform:translateY(0);pointer-events:all;}
+.chat-header{background:linear-gradient(135deg,rgba(201,169,110,.15),rgba(45,27,94,.5));padding:18px 20px;display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.chat-header-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#C9A96E,#8B5E2C);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--color-shader-cream);}
+.chat-header-info{flex:1;}
+.chat-header-name{font-size:14px;font-weight:600;color:var(--color-shader-cream);}
+.chat-header-status{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(201,169,110,.8);}
+.status-dot{width:8px;height:8px;border-radius:50%;background:#3ECF8E;}
+.chat-close{color:rgba(250,248,240,.5);padding:4px;transition:color var(--transition-fast);cursor:pointer;}
+.chat-close:hover{color:var(--color-shader-cream);}
+.chat-close svg{width:18px;height:18px;}
+#chatbot-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;scrollbar-width:thin;scrollbar-color:rgba(201,169,110,.2) transparent;}
+#chatbot-messages::-webkit-scrollbar{width:4px;}
+#chatbot-messages::-webkit-scrollbar-thumb{background:rgba(201,169,110,.2);border-radius:2px;}
+.msg-bubble{max-width:85%;display:flex;flex-direction:column;gap:3px;}
+.msg-bubble.user{align-self:flex-end;align-items:flex-end;}
+.msg-bubble.ai{align-self:flex-start;align-items:flex-start;}
+.msg-text{padding:10px 14px;border-radius:18px;font-size:14px;line-height:1.5;}
+.msg-bubble.user .msg-text{background:linear-gradient(135deg,#C9A96E,#8B5E2C);color:var(--color-shader-deep);font-weight:500;border-radius:18px 18px 4px 18px;}
+.msg-bubble.ai .msg-text{background:rgba(255,255,255,.06);border:1px solid rgba(201,169,110,.2);color:var(--color-shader-cream);border-radius:18px 18px 18px 4px;}
+.msg-time{font-size:10px;color:rgba(250,248,240,.35);}
+.msg-error .msg-text{background:rgba(255,80,80,.1);border:1px solid rgba(255,80,80,.25);color:#FF9090;}
+.quick-chips{display:flex;gap:6px;flex-wrap:wrap;padding:4px 0;}
+.quick-chip{font-size:12px;padding:6px 14px;border-radius:20px;border:1px solid rgba(201,169,110,.4);background:transparent;color:var(--color-accent);cursor:pointer;font-family:var(--font-body);transition:background var(--transition-fast);}
+.quick-chip:hover{background:rgba(201,169,110,.12);}
+.typing-indicator{display:flex;gap:4px;padding:12px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(201,169,110,.2);border-radius:18px 18px 18px 4px;align-self:flex-start;}
+.typing-dot{width:7px;height:7px;border-radius:50%;background:rgba(201,169,110,.6);animation:typingDot 1.2s ease-in-out infinite;}
+.typing-dot:nth-child(2){animation-delay:.2s;}
+.typing-dot:nth-child(3){animation-delay:.4s;}
+.chat-input-area{border-top:1px solid rgba(201,169,110,.2);padding:14px 16px;display:flex;gap:8px;align-items:center;flex-shrink:0;}
+#chatbot-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(201,169,110,.2);border-radius:var(--radius-md);padding:10px 14px;font-size:14px;color:var(--color-shader-cream);font-family:var(--font-body);}
+#chatbot-input::placeholder{color:rgba(250,248,240,.35);}
+#chatbot-input:focus{outline:none;border-color:rgba(201,169,110,.5);}
+.chat-send{width:38px;height:38px;border-radius:50%;background:var(--color-accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity var(--transition-fast);}
+.chat-send:hover{opacity:.85;}
+.chat-send svg{width:16px;height:16px;color:var(--color-shader-deep);}
+
+/* 18. ANIMATIONS & KEYFRAMES */
+@keyframes chevronBounce{0%,100%{transform:translateY(0) rotate(45deg);}50%{transform:translateY(5px) rotate(45deg);}}
+@keyframes shimmer{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
+@keyframes pulseRing{0%{transform:scale(1);opacity:.8;}100%{transform:scale(1.5);opacity:0;}}
+@keyframes typingDot{0%,100%{opacity:.3;transform:scale(1);}50%{opacity:1;transform:scale(1.15);}}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .listings-grid{grid-template-columns:repeat(2,1fr);}
+  .why-split{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  .nav-links,.nav-search-btn,.nav-cta{display:none;}
+  .hamburger{display:flex;}
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .stat-item:nth-child(3)::before{display:none;}
+  .listings-grid{grid-template-columns:1fr;}
+  .search-grid{grid-template-columns:1fr;}
+  .neighborhood-grid{grid-template-columns:1fr;}
+  .steps-row{grid-template-columns:1fr;gap:var(--space-lg);}
+  .steps-row::before{display:none;}
+  .testi-grid{grid-template-columns:1fr;}
+  .team-grid{grid-template-columns:1fr;}
+  .lead-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  #chatbot-panel{width:95vw;right:-14px;border-radius:var(--radius-lg) var(--radius-lg) 0 0;}
+  .hero-thumbs{display:none;}
+  .why-grid{grid-template-columns:1fr;}
+}
+@media(max-width:480px){
+  .hero-ctas{flex-direction:column;}
+  .hero-search{flex-wrap:wrap;border-radius:var(--radius-md);padding:var(--space-sm);}
+  .hero-search input,.hero-search select{width:100%;}
+}
+</style>
+</head>
+<body>
+
+<!-- SHADER CANVAS (permitted inline style exception for render-blocking prevention) -->
+<canvas id="shader-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+
+<div class="drawer-overlay" id="drawer-overlay"></div>
+
+<!-- SECTION: NAV | ID: main-nav | DO NOT REMOVE THIS COMMENT -->
+<header id="main-nav" role="banner">
+  <!-- CLIENT-SWAP: Agency logo name -->
+  <a href="/" class="nav-logo">PREMIER<span>·</span>REALTY</a>
+  <nav class="nav-links" aria-label="Primary navigation">
+    <a href="#featured-listings">Buy</a>
+    <a href="#featured-listings">Rent</a>
+    <a href="#lead-capture">Sell</a>
+    <a href="#neighborhoods">Neighborhoods</a>
+    <a href="#why-us">About</a>
+    <a href="#lead-capture">Contact</a>
+  </nav>
+  <div class="nav-actions">
+    <button class="nav-search-btn" aria-label="Search properties">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+    <!-- CLIENT-SWAP: Book a Call CTA link -->
+    <a href="#lead-capture" class="nav-cta">Book a Call</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-drawer">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<nav class="mobile-drawer" id="mobile-drawer" aria-label="Mobile navigation">
+  <a href="#featured-listings">Buy</a>
+  <a href="#featured-listings">Rent</a>
+  <a href="#lead-capture">Sell</a>
+  <a href="#neighborhoods">Neighborhoods</a>
+  <a href="#why-us">About</a>
+  <a href="#lead-capture">Contact</a>
+  <a href="#lead-capture" class="nav-cta">Book a Call</a>
+</nav>
+
+<main>
+
+<!-- SECTION: HERO | ID: hero | DO NOT REMOVE THIS COMMENT -->
+<section id="hero" aria-label="Hero — Find your home">
+  <div class="hero-bg">
+    <!-- CLIENT-SWAP: Hero building photograph URL -->
+    <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1800"
+         alt="Luxury glass tower building" class="hero-bg-img" loading="eager" decoding="async">
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content container">
+    <!-- CLIENT-SWAP: Hero headline text -->
+    <h1 class="hero-headline">Find Luxury<br>You Can Call Home</h1>
+    <span class="hero-gold-line"></span>
+    <!-- CLIENT-SWAP: Hero subheadline — replace [City Name] -->
+    <p class="hero-sub">Premier properties in [City Name]. Guided by experts who live and breathe this market.</p>
+    <div class="hero-thumbs">
+      <div class="hero-thumb">
+        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400" alt="Penthouse Suite" loading="lazy" decoding="async">
+        <p class="hero-thumb-label">Penthouse Suite</p>
+      </div>
+      <div class="hero-thumb">
+        <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400" alt="Commercial Tower" loading="lazy" decoding="async">
+        <p class="hero-thumb-label">Commercial Tower</p>
+      </div>
+      <div class="hero-thumb">
+        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400" alt="Garden Villa" loading="lazy" decoding="async">
+        <p class="hero-thumb-label">Garden Villa</p>
+      </div>
+    </div>
+    <div class="hero-search" role="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(250,248,240,0.55)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" placeholder="City, neighborhood, or address..." aria-label="Search location">
+      <select aria-label="Transaction type">
+        <option value="buy">Buy</option>
+        <option value="rent">Rent</option>
+      </select>
+      <button class="hero-search-btn" type="button">Search</button>
+    </div>
+    <div class="hero-ctas">
+      <a href="#featured-listings" class="btn-ghost">Browse Listings →</a>
+      <a href="#lead-capture" class="btn-ghost">Get Free Valuation</a>
+    </div>
+  </div>
+  <div class="scroll-indicator" aria-hidden="true">
+    <span class="scroll-label">SCROLL</span>
+    <div class="scroll-chevron"></div>
+  </div>
+</section>
+
+<!-- SECTION: STATS BAR | ID: stats-bar | DO NOT REMOVE THIS COMMENT -->
+<section id="stats-bar" aria-label="Key agency statistics">
+  <div class="stats-grid">
+    <div class="stat-item fade-in">
+      <span class="stat-number">500+</span>
+      <p class="stat-label">Properties Sold</p>
+    </div>
+    <div class="stat-item fade-in">
+      <span class="stat-number">12</span>
+      <p class="stat-label">Years in the Market</p>
+    </div>
+    <div class="stat-item fade-in">
+      <span class="stat-number">4.9★</span>
+      <p class="stat-label">Average Rating</p>
+    </div>
+    <div class="stat-item fade-in">
+      <span class="stat-number">98%</span>
+      <p class="stat-label">Client Satisfaction</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: FEATURED LISTINGS | ID: featured-listings | DO NOT REMOVE THIS COMMENT -->
+<section id="featured-listings" class="section-pad">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div>
+        <p class="eyebrow">Properties</p>
+        <h2 class="section-title">Featured Listings</h2>
+        <span class="gold-line"></span>
+      </div>
+      <a href="#" class="view-all-link">View All →</a>
+    </div>
+    <div class="filter-tabs" role="tablist" aria-label="Filter properties by type">
+      <button class="filter-tab active" data-filter="all" role="tab" aria-selected="true">All</button>
+      <button class="filter-tab" data-filter="sale" role="tab" aria-selected="false">For Sale</button>
+      <button class="filter-tab" data-filter="rent" role="tab" aria-selected="false">For Rent</button>
+      <button class="filter-tab" data-filter="new" role="tab" aria-selected="false">New Development</button>
+    </div>
+    <div class="listings-grid">
+
+      <!-- Card 1 — For Sale -->
+      <article class="property-card fade-in" data-type="sale">
+        <div class="card-image">
+          <!-- CLIENT-SWAP: Property image URL -->
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600" alt="The Meridian Penthouse" loading="lazy" decoding="async">
+          <span class="card-badge badge-sale">For Sale</span>
+          <button class="card-fav" aria-label="Save The Meridian to favourites">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <button class="card-view-btn">View Details</button>
+        </div>
+        <div class="card-body">
+          <!-- CLIENT-SWAP: Price — USD default; add local currency symbol as needed -->
+          <p class="card-price">$1,250,000</p>
+          <h3 class="card-name">The Meridian Penthouse</h3>
+          <p class="card-address">123 Skyline Blvd, [City Name]</p>
+          <div class="card-specs">
+            <span class="spec-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9V7a2 2 0 012-2h16a2 2 0 012 2v2M3 9h18v11H3"/><path d="M9 9V7"/></svg>3 Beds</span>
+            <span class="spec-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17h18v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2z"/><path d="M2 17V8h5v9"/><path d="M7 8a3 3 0 016 0v9"/></svg>2 Baths</span>
+            <span class="spec-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>1,850 sqft</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 — For Rent -->
+      <article class="property-card fade-in" data-type="rent">
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600" alt="Sunset Terrace Apartment" loading="lazy" decoding="async">
+          <span class="card-badge badge-rent">For Rent</span>
+          <button class="card-fav" aria-label="Save Sunset Terrace to favourites">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <button class="card-view-btn">View Details</button>
+        </div>
+        <div class="card-body">
+          <p class="card-price">$4,200/mo</p>
+          <h3 class="card-name">Sunset Terrace</h3>
+          <p class="card-address">456 Palm Drive, [City Name]</p>
+          <div class="card-specs">
+            <span class="spec-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9V7a2 2 0 012-2h16a2 2 0 012 2v2M3 9h18v11H3"/><path d="M9 9V7"/></svg>2 Beds</span>
+            <span class="spec-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17h18v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2z"/><path d="M2 17V8h5v9"/><path d="M7 8a3 3 0 016 0v9"/></svg>2 Baths</span>
+            <span class="spec-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>1,100 sqft</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 — For Sale -->
+      <article class="property-card fade-in" data-type="sale">
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600" alt="Harbor Heights Villa" loading="lazy" decoding="async">
+          <span class="card-badge badge-sale">For Sale</span>
+          <button class="card-fav" aria-label="Save Harbor Heights to favourites">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <button class="card-view-btn">View Details</button>
+        </div>
+        <div class="card-body">
+          <p class="card-price">$2,850,000</p>
+          <h3 class="card-name">Harbor Heights Villa</h3>
+          <p class="card-address">789 Harbor View Dr, [City Name]</p>
+          <div class="card-specs">
+            <span class="spec-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9V7a2 2 0 012-2h16a2 2 0 012 2v2M3 9h18v11H3"/><path d="M9 9V7"/></svg>4 Beds</span>
+            <span class="spec-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17h18v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2z"/><path d="M2 17V8h5v9"/><path d="M7 8a3 3 0 016 0v9"/></svg>3 Baths</span>
+            <span class="spec-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>3,200 sqft</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4 — New Development -->
+      <article class="property-card fade-in" data-type="new">
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1600210491369-e753d80a41f3?w=600" alt="The Atelier" loading="lazy" decoding="async">
+          <span class="card-badge badge-new">New</span>
+          <button class="card-fav" aria-label="Save The Atelier to favourites">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <button class="card-view-btn">View Details</button>
+        </div>
+        <div class="card-body">
+          <p class="card-price">$950,000</p>
+          <h3 class="card-name">The Atelier</h3>
+          <p class="card-address">101 Arts Quarter, [City Name]</p>
+          <div class="card-specs">
+            <span class="spec-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9V7a2 2 0 012-2h16a2 2 0 012 2v2M3 9h18v11H3"/><path d="M9 9V7"/></svg>2 Beds</span>
+            <span class="spec-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17h18v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2z"/><path d="M2 17V8h5v9"/><path d="M7 8a3 3 0 016 0v9"/></svg>2 Baths</span>
+            <span class="spec-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>1,450 sqft</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 5 — For Sale -->
+      <article class="property-card fade-in" data-type="sale">
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600" alt="Olive Grove Estate" loading="lazy" decoding="async">
+          <span class="card-badge badge-sale">For Sale</span>
+          <button class="card-fav" aria-label="Save Olive Grove to favourites">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <button class="card-view-btn">View Details</button>
+        </div>
+        <div class="card-body">
+          <p class="card-price">$3,500,000</p>
+          <h3 class="card-name">Olive Grove Estate</h3>
+          <p class="card-address">22 Hillcrest Lane, [City Name]</p>
+          <div class="card-specs">
+            <span class="spec-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9V7a2 2 0 012-2h16a2 2 0 012 2v2M3 9h18v11H3"/><path d="M9 9V7"/></svg>5 Beds</span>
+            <span class="spec-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17h18v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2z"/><path d="M2 17V8h5v9"/><path d="M7 8a3 3 0 016 0v9"/></svg>4 Baths</span>
+            <span class="spec-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>4,800 sqft</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 6 — For Rent -->
+      <article class="property-card fade-in" data-type="rent">
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600" alt="Skyline Studio" loading="lazy" decoding="async">
+          <span class="card-badge badge-rent">For Rent</span>
+          <button class="card-fav" aria-label="Save Skyline Studio to favourites">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </button>
+          <button class="card-view-btn">View Details</button>
+        </div>
+        <div class="card-body">
+          <p class="card-price">$2,800/mo</p>
+          <h3 class="card-name">Skyline Studio</h3>
+          <p class="card-address">88 Central Ave, [City Name]</p>
+          <div class="card-specs">
+            <span class="spec-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9V7a2 2 0 012-2h16a2 2 0 012 2v2M3 9h18v11H3"/><path d="M9 9V7"/></svg>1 Bed</span>
+            <span class="spec-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17h18v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-2z"/><path d="M2 17V8h5v9"/><path d="M7 8a3 3 0 016 0v9"/></svg>1 Bath</span>
+            <span class="spec-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>750 sqft</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: SEARCH PANEL | ID: search-panel | DO NOT REMOVE THIS COMMENT -->
+<section id="search-panel" class="section-pad">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div>
+        <p class="eyebrow">Advanced Search</p>
+        <h2 class="section-title">Find Your Ideal Property</h2>
+        <span class="gold-line"></span>
+      </div>
+    </div>
+    <div class="search-card fade-in">
+      <div class="search-fields">
+        <div class="search-grid">
+          <div class="form-group">
+            <label class="form-label" for="search-location">Location</label>
+            <input type="text" id="search-location" class="form-input" placeholder="City, neighborhood, or ZIP">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="search-type">Property Type</label>
+            <select id="search-type" class="form-select" aria-label="Property type">
+              <option>Any</option>
+              <option>House</option>
+              <option>Apartment</option>
+              <option>Villa</option>
+              <option>Commercial</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Price Range</label>
+          <div class="price-slider-wrap">
+            <div class="price-range-track">
+              <div class="price-range-fill" id="range-fill"></div>
+            </div>
+            <div class="price-range-wrap">
+              <input type="range" id="price-min" min="0" max="100" value="0" aria-label="Minimum price">
+              <input type="range" id="price-max" min="0" max="100" value="40" aria-label="Maximum price">
+            </div>
+            <div class="price-display">
+              <span id="price-min-label">$200K</span>
+              <span id="price-max-label">$1M</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Bedrooms</label>
+          <div class="bed-pills" role="group" aria-label="Bedroom count">
+            <button class="bed-pill active" type="button">Any</button>
+            <button class="bed-pill" type="button">1</button>
+            <button class="bed-pill" type="button">2</button>
+            <button class="bed-pill" type="button">3</button>
+            <button class="bed-pill" type="button">4+</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Amenities</label>
+          <div class="amenity-grid">
+            <label class="amenity-check"><input type="checkbox" name="amenity" value="pool"> Pool</label>
+            <label class="amenity-check"><input type="checkbox" name="amenity" value="garden"> Garden</label>
+            <label class="amenity-check"><input type="checkbox" name="amenity" value="garage"> Garage</label>
+            <label class="amenity-check"><input type="checkbox" name="amenity" value="gym"> Gym</label>
+            <label class="amenity-check"><input type="checkbox" name="amenity" value="balcony"> Balcony</label>
+            <label class="amenity-check"><input type="checkbox" name="amenity" value="parking"> Parking</label>
+          </div>
+        </div>
+      </div>
+      <button class="search-full-btn" type="button">Search Properties</button>
+      <p class="map-link"><a href="#map">Or browse on map →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: NEIGHBORHOODS | ID: neighborhoods | DO NOT REMOVE THIS COMMENT -->
+<section id="neighborhoods" class="section-pad">
+  <div class="container">
+    <div class="text-center fade-in">
+      <p class="eyebrow">Explore</p>
+      <h2 class="section-title">Explore Neighborhoods</h2>
+      <span class="gold-line"></span>
+      <p class="section-subtitle">Discover the lifestyle behind every address</p>
+    </div>
+    <div class="neighborhood-grid mt-md">
+      <div class="hood-card fade-in">
+        <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600" alt="Riverside District" loading="lazy" decoding="async">
+        <div class="hood-overlay"></div>
+        <div class="hood-content">
+          <h3 class="hood-name">Riverside District</h3>
+          <p class="hood-city">[City Name]</p>
+          <div class="hood-tags">
+            <span class="hood-tag">Family Friendly</span>
+            <span class="hood-tag">Walkable</span>
+          </div>
+          <div class="hood-stats">
+            <span>Avg. $850K</span>
+            <span>Walk Score: 89</span>
+          </div>
+        </div>
+        <button class="hood-explore" type="button">Explore →</button>
+      </div>
+      <div class="hood-card fade-in">
+        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600" alt="The Heights" loading="lazy" decoding="async">
+        <div class="hood-overlay"></div>
+        <div class="hood-content">
+          <h3 class="hood-name">The Heights</h3>
+          <p class="hood-city">[City Name]</p>
+          <div class="hood-tags">
+            <span class="hood-tag">Investment Hotspot</span>
+            <span class="hood-tag">Luxury</span>
+          </div>
+          <div class="hood-stats">
+            <span>Avg. $1.4M</span>
+            <span>Walk Score: 72</span>
+          </div>
+        </div>
+        <button class="hood-explore" type="button">Explore →</button>
+      </div>
+      <div class="hood-card fade-in">
+        <img src="https://images.unsplash.com/photo-1444723121867-7a241cacace9?w=600" alt="Midtown Arts" loading="lazy" decoding="async">
+        <div class="hood-overlay"></div>
+        <div class="hood-content">
+          <h3 class="hood-name">Midtown Arts</h3>
+          <p class="hood-city">[City Name]</p>
+          <div class="hood-tags">
+            <span class="hood-tag">Walkable</span>
+            <span class="hood-tag">Urban</span>
+          </div>
+          <div class="hood-stats">
+            <span>Avg. $620K</span>
+            <span>Walk Score: 95</span>
+          </div>
+        </div>
+        <button class="hood-explore" type="button">Explore →</button>
+      </div>
+      <div class="hood-card fade-in">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600" alt="Bayside Cove" loading="lazy" decoding="async">
+        <div class="hood-overlay"></div>
+        <div class="hood-content">
+          <h3 class="hood-name">Bayside Cove</h3>
+          <p class="hood-city">[City Name]</p>
+          <div class="hood-tags">
+            <span class="hood-tag">Luxury</span>
+            <span class="hood-tag">Waterfront</span>
+          </div>
+          <div class="hood-stats">
+            <span>Avg. $2.1M</span>
+            <span>Walk Score: 68</span>
+          </div>
+        </div>
+        <button class="hood-explore" type="button">Explore →</button>
+      </div>
+    </div>
+    <div class="neighborhoods-cta fade-in">
+      <a href="#" class="btn-outline">View All Neighborhoods →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: HOW IT WORKS | ID: how-it-works | DO NOT REMOVE THIS COMMENT -->
+<section id="how-it-works" class="section-pad">
+  <div class="container">
+    <div class="text-center fade-in">
+      <p class="eyebrow">The Process</p>
+      <h2 class="section-title">Your Journey to the Perfect Home</h2>
+      <span class="gold-line"></span>
+    </div>
+    <div class="steps-row">
+      <div class="step-item fade-in">
+        <div class="step-num">1</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <h3 class="step-title">Search &amp; Shortlist</h3>
+        <p class="step-desc">Describe your ideal property and we match you with the best available options.</p>
+      </div>
+      <div class="step-item fade-in">
+        <div class="step-num">2</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <h3 class="step-title">Schedule Viewings</h3>
+        <p class="step-desc">Book in-person or virtual tours at times that fit your schedule.</p>
+      </div>
+      <div class="step-item fade-in">
+        <div class="step-num">3</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><circle cx="7" cy="7" r="1.5" fill="currentColor"/></svg>
+        </div>
+        <h3 class="step-title">Make an Offer</h3>
+        <p class="step-desc">Our experts negotiate the best deal on your behalf with confidence.</p>
+      </div>
+      <div class="step-item fade-in">
+        <div class="step-num">4</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3 class="step-title">Close &amp; Move In</h3>
+        <p class="step-desc">We handle all the paperwork so you can focus on your new home.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: WHY US | ID: why-us | DO NOT REMOVE THIS COMMENT -->
+<section id="why-us" class="section-pad">
+  <div class="container">
+    <div class="why-split">
+      <div class="why-left fade-in">
+        <p class="eyebrow">Why Premier Realty</p>
+        <h2 class="section-title">We Do More Than Find You a House</h2>
+        <span class="gold-line"></span>
+        <p>At Premier Realty, we've spent 12 years building deep roots in the [City Name] market. We combine honest guidance, rigorous listing verification, and a dedicated advisor for every client — because finding the right home should feel reassuring, not stressful.</p>
+        <a href="#team" class="btn-primary mt-md">Meet Our Team →</a>
+      </div>
+      <div class="why-grid fade-in">
+        <div class="why-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          <h4>Verified Listings</h4>
+          <p>Every listing confirmed with the owner on a weekly basis — no ghost properties.</p>
+        </div>
+        <div class="why-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+          <h4>Local Expertise</h4>
+          <p>12 years of intimate knowledge of the [City Name] market, street by street.</p>
+        </div>
+        <div class="why-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <h4>Dedicated Agent</h4>
+          <p>One advisor assigned to you from the very first search to final close.</p>
+        </div>
+        <div class="why-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <h4>Fast Follow-Up</h4>
+          <p>Response within 2 hours, always. Not a promise — a track record.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: TESTIMONIALS | ID: testimonials | DO NOT REMOVE THIS COMMENT -->
+<section id="testimonials" itemscope itemtype="https://schema.org/Organization">
+  <meta itemprop="name" content="Premier Realty">
+  <div class="container">
+    <div class="testi-header fade-in">
+      <p class="eyebrow">What Our Clients Say</p>
+      <h2 class="section-title">Stories That Move Us</h2>
+      <span class="gold-line"></span>
+    </div>
+    <div class="testi-grid">
+
+      <div class="testi-card fade-in" itemprop="review" itemscope itemtype="https://schema.org/Review">
+        <meta itemprop="ratingValue" content="5">
+        <meta itemprop="bestRating" content="5">
+        <div class="testi-quote-mark">"</div>
+        <p class="testi-text"><span itemprop="reviewBody">This team didn't just find us a house. They handed us a life we didn't know we were allowed to want.</span></p>
+        <div class="testi-stars" aria-label="5 out of 5 stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <hr class="testi-divider">
+        <div class="testi-author">
+          <div class="testi-avatar">AT</div>
+          <div>
+            <p class="testi-name"><span itemprop="author">Amanda &amp; Derek T.</span></p>
+            <p class="testi-city">[City Name]</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card fade-in" itemprop="review" itemscope itemtype="https://schema.org/Review">
+        <meta itemprop="ratingValue" content="5">
+        <meta itemprop="bestRating" content="5">
+        <div class="testi-quote-mark">"</div>
+        <p class="testi-text"><span itemprop="reviewBody">Every concern I raised was answered before I finished the sentence. Absolute professionals from start to finish.</span></p>
+        <div class="testi-stars" aria-label="5 out of 5 stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <hr class="testi-divider">
+        <div class="testi-author">
+          <div class="testi-avatar">ML</div>
+          <div>
+            <p class="testi-name"><span itemprop="author">Marcus L.</span></p>
+            <p class="testi-city">[City Name]</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card fade-in" itemprop="review" itemscope itemtype="https://schema.org/Review">
+        <meta itemprop="ratingValue" content="5">
+        <meta itemprop="bestRating" content="5">
+        <div class="testi-quote-mark">"</div>
+        <p class="testi-text"><span itemprop="reviewBody">I've bought four properties across three countries. Premier Realty is the only team I've ever recommended without hesitation.</span></p>
+        <div class="testi-stars" aria-label="5 out of 5 stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <hr class="testi-divider">
+        <div class="testi-author">
+          <div class="testi-avatar">PS</div>
+          <div>
+            <p class="testi-name"><span itemprop="author">Priya S.</span></p>
+            <p class="testi-city">[City Name]</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="testi-cta fade-in">
+      <a href="#lead-capture">Join 2,000+ happy homeowners →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: TEAM | ID: team | DO NOT REMOVE THIS COMMENT -->
+<section id="team" class="section-pad">
+  <div class="container">
+    <div class="text-center fade-in">
+      <p class="eyebrow">The People</p>
+      <h2 class="section-title">Meet Your Advisors</h2>
+      <span class="gold-line"></span>
+    </div>
+    <div class="team-grid mt-md">
+
+      <div class="agent-card fade-in">
+        <div class="agent-avatar">SM</div>
+        <!-- CLIENT-SWAP: Agent name and details -->
+        <h3 class="agent-name">Sarah Mitchell</h3>
+        <p class="agent-title">Senior Property Advisor</p>
+        <div class="agent-specs">
+          <span class="agent-spec">Residential</span>
+          <span class="agent-spec">Luxury</span>
+          <span class="agent-spec">First-Time Buyers</span>
+        </div>
+        <p class="agent-bio">Sarah has guided over 180 families through their buying journey. Her calm, detail-oriented approach makes complex transactions feel effortless.</p>
+        <div class="agent-contacts">
+          <!-- CLIENT-SWAP: Agent phone and email -->
+          <a href="tel:+15550000001" class="agent-contact-btn" aria-label="Call Sarah">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          </a>
+          <a href="mailto:sarah@premierrealty.com" class="agent-contact-btn" aria-label="Email Sarah">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+          <a href="https://wa.me/15550000001" class="agent-contact-btn" aria-label="WhatsApp Sarah">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+        <a href="#lead-capture" class="agent-profile-link">View Profile →</a>
+      </div>
+
+      <div class="agent-card fade-in">
+        <div class="agent-avatar">JP</div>
+        <h3 class="agent-name">James Park</h3>
+        <p class="agent-title">Investment Specialist</p>
+        <div class="agent-specs">
+          <span class="agent-spec">Commercial</span>
+          <span class="agent-spec">Investment</span>
+          <span class="agent-spec">Development</span>
+        </div>
+        <p class="agent-bio">James brings a data-driven perspective to every acquisition. With a background in finance, he identifies value where others see complexity.</p>
+        <div class="agent-contacts">
+          <a href="tel:+15550000002" class="agent-contact-btn" aria-label="Call James">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          </a>
+          <a href="mailto:james@premierrealty.com" class="agent-contact-btn" aria-label="Email James">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+          <a href="https://wa.me/15550000002" class="agent-contact-btn" aria-label="WhatsApp James">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+        <a href="#lead-capture" class="agent-profile-link">View Profile →</a>
+      </div>
+
+      <div class="agent-card fade-in">
+        <div class="agent-avatar">EC</div>
+        <h3 class="agent-name">Elena Costa</h3>
+        <p class="agent-title">Luxury Sales Director</p>
+        <div class="agent-specs">
+          <span class="agent-spec">Luxury</span>
+          <span class="agent-spec">Waterfront</span>
+          <span class="agent-spec">New Builds</span>
+        </div>
+        <p class="agent-bio">Elena's portfolio spans eight-figure waterfront estates and architectural landmarks. She redefines what exceptional service looks like at every price point.</p>
+        <div class="agent-contacts">
+          <a href="tel:+15550000003" class="agent-contact-btn" aria-label="Call Elena">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          </a>
+          <a href="mailto:elena@premierrealty.com" class="agent-contact-btn" aria-label="Email Elena">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+          <a href="https://wa.me/15550000003" class="agent-contact-btn" aria-label="WhatsApp Elena">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+        <a href="#lead-capture" class="agent-profile-link">View Profile →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: LEAD CAPTURE | ID: lead-capture | DO NOT REMOVE THIS COMMENT -->
+<section id="lead-capture" class="section-pad">
+  <div class="container">
+    <div class="lead-grid">
+      <div class="lead-left fade-in">
+        <p class="eyebrow">Get Started</p>
+        <h2 class="section-title">Ready to Find Your Dream Home?</h2>
+        <p>Tell us what you're looking for. We'll have the right advisor reach out within 2 hours.</p>
+        <div class="lead-trust mt-md">
+          <span class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            Your data is safe
+          </span>
+          <span class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            No spam, ever
+          </span>
+          <span class="trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Response in 2 hours
+          </span>
+        </div>
+      </div>
+      <div class="lead-form fade-in">
+        <form>
+          <div class="search-fields">
+            <div class="form-group">
+              <label class="form-label" for="lead-name">Full Name</label>
+              <!-- CLIENT-SWAP: Form action endpoint -->
+              <input type="text" id="lead-name" class="form-input" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="lead-contact">Phone or Email</label>
+              <input type="text" id="lead-contact" class="form-input" placeholder="+1 (555) 000-0000 or email@you.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="lead-intent">I'm interested in</label>
+              <select id="lead-intent" class="form-select">
+                <option value="">Select one</option>
+                <option value="buying">Buying a Property</option>
+                <option value="selling">Selling a Property</option>
+                <option value="investing">Real Estate Investment</option>
+                <option value="renting">Renting</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="lead-submit">Get in Touch</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: FOOTER | ID: main-footer | DO NOT REMOVE THIS COMMENT -->
+<footer id="main-footer" role="contentinfo">
+  <div class="footer-grid">
+    <div>
+      <!-- CLIENT-SWAP: Footer logo and tagline -->
+      <p class="footer-logo">PREMIER<span>·</span>REALTY</p>
+      <p class="footer-tagline">Helping families find their perfect home in [City Name] since 2012.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" class="footer-social" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+        </a>
+        <a href="#" class="footer-social" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="#" class="footer-social" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Quick Links</p>
+      <ul class="footer-links">
+        <li><a href="#featured-listings">Buy</a></li>
+        <li><a href="#featured-listings">Rent</a></li>
+        <li><a href="#lead-capture">Sell</a></li>
+        <li><a href="#neighborhoods">Neighborhoods</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Contact</p>
+      <!-- CLIENT-SWAP: Agency address, phone, email -->
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>123 Main Street, [City Name]</span>
+      </div>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        <a href="tel:+15550000000">+1 (555) 000-0000</a>
+      </div>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:hello@premierrealty.com">hello@premierrealty.com</a>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Stay Updated</p>
+      <p class="footer-tagline">New listings, market insights, and tips direct to your inbox.</p>
+      <div class="footer-newsletter">
+        <input type="email" placeholder="your@email.com" aria-label="Newsletter email">
+        <button type="button">Subscribe</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <!-- CLIENT-SWAP: Copyright year and RERA/license number -->
+    <p class="footer-copy">© 2025 Premier Realty. All rights reserved. RERA Reg. No. XXXXXX</p>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+</main>
+
+<!-- SECTION: CHATBOT | ID: chatbot-widget | DO NOT REMOVE THIS COMMENT -->
+<div id="chatbot-widget" aria-live="polite">
+  <button id="chatbot-toggle" aria-label="Open chat assistant" aria-expanded="false">
+    <div class="pulse-ring"></div>
+    <svg class="icon-chat" viewBox="0 0 24 24" fill="white"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <div id="chatbot-panel" role="dialog" aria-label="Premier Realty chat assistant" aria-modal="false">
+    <div class="chat-header">
+      <div class="chat-header-avatar">PR</div>
+      <div class="chat-header-info">
+        <p class="chat-header-name">Premier Realty Assistant</p>
+        <div class="chat-header-status">
+          <span class="status-dot"></span>
+          Online · Replies instantly
+        </div>
+      </div>
+      <button class="chat-close" id="chat-close-btn" aria-label="Close chat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="chatbot-messages"></div>
+    <div class="chat-input-area">
+      <input type="text" id="chatbot-input" placeholder="Ask about properties, pricing, viewings..." aria-label="Chat message">
+      <button class="chat-send" id="chat-send-btn" aria-label="Send message">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2" fill="currentColor" stroke="none"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* === CONSTANTS & CONFIG === */
+/* Replace with your Anthropic API key — do NOT commit to public repo */
+const ANTHROPIC_API_KEY = 'YOUR_API_KEY_HERE';
+const AGENCY_NAME = 'Premier Realty';
+const AGENCY_CITY = '[City Name]';
+const AGENCY_PHONE = '+1 (555) 000-0000';
+const AGENCY_EMAIL = 'hello@premierrealty.com';
+
+let chatHistory = [];
+let isChatOpen = false;
+const shaderCanvas = document.getElementById('shader-canvas');
+let gl;
+let uTime = 0;
+let shaderProgram;
+
+/* === WEBGL SHADER INIT === */
+function initShader() {
+  gl = shaderCanvas.getContext('webgl') || shaderCanvas.getContext('experimental-webgl');
+  if (!gl) return;
+
+  function resize() {
+    shaderCanvas.width = window.innerWidth;
+    shaderCanvas.height = window.innerHeight;
+    gl.viewport(0, 0, shaderCanvas.width, shaderCanvas.height);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const vsSource = `attribute vec2 position;void main(){gl_Position=vec4(position,0.0,1.0);}`;
+  const fsSource = document.getElementById('fragment-shader').textContent;
+
+  function compile(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+
+  shaderProgram = gl.createProgram();
+  gl.attachShader(shaderProgram, compile(gl.VERTEX_SHADER, vsSource));
+  gl.attachShader(shaderProgram, compile(gl.FRAGMENT_SHADER, fsSource));
+  gl.linkProgram(shaderProgram);
+  gl.useProgram(shaderProgram);
+
+  const verts = new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1]);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, verts, gl.STATIC_DRAW);
+
+  const posLoc = gl.getAttribLocation(shaderProgram, 'position');
+  gl.enableVertexAttribArray(posLoc);
+  gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+  renderShader();
+}
+
+function renderShader() {
+  if (!gl) return;
+  uTime += 0.0003;
+  gl.uniform1f(gl.getUniformLocation(shaderProgram, 'uTime'), uTime);
+  gl.uniform2f(gl.getUniformLocation(shaderProgram, 'uResolution'), shaderCanvas.width, shaderCanvas.height);
+  gl.drawArrays(gl.TRIANGLES, 0, 6);
+  requestAnimationFrame(renderShader);
+}
+
+/* === NAV SCROLL BEHAVIOR === */
+function initNav() {
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+}
+
+/* === MOBILE MENU === */
+function initMobileMenu() {
+  const hamburger = document.getElementById('hamburger');
+  const drawer = document.getElementById('mobile-drawer');
+  const overlay = document.getElementById('drawer-overlay');
+
+  function toggle(open) {
+    hamburger.classList.toggle('open', open);
+    drawer.classList.toggle('open', open);
+    overlay.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  hamburger.addEventListener('click', () => toggle(!drawer.classList.contains('open')));
+  overlay.addEventListener('click', () => toggle(false));
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggle(false)));
+}
+
+/* === LISTINGS FILTER === */
+function initListingsFilter() {
+  const tabs = document.querySelectorAll('.filter-tab');
+  const cards = document.querySelectorAll('.property-card');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+
+      const filter = tab.dataset.filter;
+      cards.forEach(card => {
+        const show = filter === 'all' || card.dataset.type === filter;
+        if (show) {
+          card.classList.remove('hidden');
+          requestAnimationFrame(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; });
+        } else {
+          card.style.opacity = '0';
+          card.style.transform = 'scale(0.96)';
+          setTimeout(() => card.classList.add('hidden'), 280);
+        }
+      });
+    });
+  });
+}
+
+/* === PRICE RANGE SLIDER === */
+function initPriceSlider() {
+  const minInput = document.getElementById('price-min');
+  const maxInput = document.getElementById('price-max');
+  const fill = document.getElementById('range-fill');
+  const minLabel = document.getElementById('price-min-label');
+  const maxLabel = document.getElementById('price-max-label');
+  if (!minInput) return;
+
+  const PRICES = [200,300,400,500,600,750,900,1000,1250,1500,1750,2000,2500,3000,4000,5000];
+  const last = PRICES.length - 1;
+  minInput.max = last; maxInput.max = last;
+  minInput.value = 0; maxInput.value = 8;
+
+  function fmt(v) {
+    return v >= 1000 ? '$' + (v/1000).toFixed(v % 1000 === 0 ? 0 : 1) + 'M' : '$' + v + 'K';
+  }
+
+  function update() {
+    let lo = Math.min(parseInt(minInput.value), parseInt(maxInput.value));
+    let hi = Math.max(parseInt(minInput.value), parseInt(maxInput.value));
+    const pct = v => (v / last) * 100;
+    fill.style.left = pct(lo) + '%';
+    fill.style.width = (pct(hi) - pct(lo)) + '%';
+    minLabel.textContent = fmt(PRICES[lo]);
+    maxLabel.textContent = fmt(PRICES[hi]);
+  }
+
+  minInput.addEventListener('input', update);
+  maxInput.addEventListener('input', update);
+  update();
+}
+
+/* === INTERSECTION OBSERVER (scroll animations) === */
+function initScrollAnimations() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+}
+
+/* === CHATBOT === */
+function initChatbot() {
+  const toggle  = document.getElementById('chatbot-toggle');
+  const panel   = document.getElementById('chatbot-panel');
+  const closeBtn= document.getElementById('chat-close-btn');
+  const input   = document.getElementById('chatbot-input');
+  const sendBtn = document.getElementById('chat-send-btn');
+
+  appendMessage('ai', `Hi! I'm your ${AGENCY_NAME} assistant. Ask me about available properties, pricing, neighbourhoods, or how to schedule a viewing. I'm here to help you find your perfect home.`);
+
+  const chips = document.createElement('div');
+  chips.className = 'quick-chips';
+  ['Browse Properties', 'Book a Viewing', 'Talk to an Agent'].forEach(label => {
+    const btn = document.createElement('button');
+    btn.className = 'quick-chip';
+    btn.textContent = label;
+    btn.addEventListener('click', () => { chips.remove(); sendChatMessage(label); });
+    chips.appendChild(btn);
+  });
+  document.getElementById('chatbot-messages').appendChild(chips);
+
+  function openChat() {
+    isChatOpen = true;
+    panel.classList.add('open');
+    toggle.classList.add('open');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.querySelector('.pulse-ring')?.remove();
+    input.focus();
+  }
+  function closeChat() {
+    isChatOpen = false;
+    panel.classList.remove('open');
+    toggle.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+
+  toggle.addEventListener('click', () => isChatOpen ? closeChat() : openChat());
+  closeBtn.addEventListener('click', closeChat);
+
+  function submitInput() {
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    sendChatMessage(text);
+  }
+
+  sendBtn.addEventListener('click', submitInput);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submitInput(); } });
+}
+
+function appendMessage(role, text) {
+  const messages = document.getElementById('chatbot-messages');
+  const wrap = document.createElement('div');
+  wrap.className = 'msg-bubble ' + (role === 'error' ? 'ai msg-error' : role);
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-text';
+  bubble.textContent = text;
+  const time = document.createElement('span');
+  time.className = 'msg-time';
+  time.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  wrap.appendChild(bubble);
+  wrap.appendChild(time);
+  messages.appendChild(wrap);
+  messages.scrollTop = messages.scrollHeight;
+  return wrap;
+}
+
+function showTypingIndicator() {
+  const messages = document.getElementById('chatbot-messages');
+  const ind = document.createElement('div');
+  ind.className = 'typing-indicator';
+  ind.id = 'typing-indicator';
+  for (let i = 0; i < 3; i++) { const d = document.createElement('div'); d.className = 'typing-dot'; ind.appendChild(d); }
+  messages.appendChild(ind);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function hideTypingIndicator() {
+  document.getElementById('typing-indicator')?.remove();
+}
+
+async function sendChatMessage(text) {
+  appendMessage('user', text);
+  chatHistory.push({ role: 'user', content: text });
+  showTypingIndicator();
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 512,
+        system: `You are a warm, professional real estate assistant for ${AGENCY_NAME} in ${AGENCY_CITY}. Help users explore properties, understand buying/renting, schedule viewings, and learn about neighbourhoods. Be concise and friendly. Never invent specific listings — direct users to browse on the page or call an agent. For detailed enquiries: ${AGENCY_PHONE} or ${AGENCY_EMAIL}. Keep replies under 100 words.`,
+        messages: chatHistory
+      })
+    });
+    hideTypingIndicator();
+    if (!res.ok) throw new Error('API ' + res.status);
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || `Let me connect you with our team. Call us at ${AGENCY_PHONE}.`;
+    chatHistory.push({ role: 'assistant', content: reply });
+    appendMessage('ai', reply);
+  } catch {
+    hideTypingIndicator();
+    appendMessage('error', `I'm having a brief connection issue. Please try again, or call us at ${AGENCY_PHONE}.`);
+  }
+}
+
+/* === INIT SEQUENCE — DO NOT REORDER === */
+if (!window.matchMedia('(max-width: 768px)').matches) initShader();
+initNav();
+initMobileMenu();
+initListingsFilter();
+initPriceSlider();
+initScrollAnimations();
+initChatbot();
+</script>
+</body>
+</html>
