@@ -1369,8 +1369,8 @@ h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15;}
 
 <script>
 /* === CONSTANTS & CONFIG === */
-/* Replace with your Anthropic API key — do NOT commit to public repo */
-const ANTHROPIC_API_KEY = 'YOUR_API_KEY_HERE';
+/* API key is handled server-side in api/chat.js — set ANTHROPIC_API_KEY in Vercel env vars */
+const ANTHROPIC_API_KEY = ''; // unused in browser — key lives in Vercel environment
 const AGENCY_NAME = 'Premier Realty';
 const AGENCY_CITY = '[City Name]';
 const AGENCY_PHONE = '+1 (555) 000-0000';
@@ -1617,14 +1617,9 @@ async function sendChatMessage(text) {
   showTypingIndicator();
 
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch('/api/chat', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 512,
